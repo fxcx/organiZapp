@@ -4,16 +4,16 @@ import { taskController } from '../controllers/'
 export const taskRouter = () => {
   const taskRouter = Router()
   // destructuro las funciones que vienen controller, la logica que usaria con prisma
-  const { getUser, getUserById, createUser, updateUser, deleteUser } = taskController()
+  const { getTask, getTaskById, createTask, updateTask, deleteTask } = taskController()
 
   taskRouter.route('/task')
-    .get(getUser)
-    .post(createUser)
+    .get(getTask)
+    .post(createTask)
 
   taskRouter.route('/task/:id')
-    .get(getUserById)
-    .put(updateUser)
-    .delete(deleteUser)
+    .get(getTaskById)
+    .put(updateTask)
+    .delete(deleteTask)
 
   return taskRouter
 }
