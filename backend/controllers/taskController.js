@@ -23,9 +23,9 @@ export const taskController = () => {
       await prisma.$disconnect()
     }
   }
-  
+
   const updateTask = async (req, res, next) => {
-    try{
+    try {
       const { id } = req.params
       const taskUpdated = await prisma.user.update({
         where: {
