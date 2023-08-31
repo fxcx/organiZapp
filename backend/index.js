@@ -6,7 +6,7 @@ dotenv.config()
 const PORT = process.env.PORT || 3000
 
 const app = express()
-// conection diferentes dominios o host
+// conexión a diferentes dominios o host
 app.use(cors())
 app.use(express.json())
 

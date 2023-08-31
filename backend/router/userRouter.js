@@ -3,7 +3,7 @@ import { userController } from '../controllers/userController'
 
 export const userRouter = () => {
   const userRouter = Router()
-  // destructuro las funciones que vienen controller, la logica que usaria con prisma
+  // desestructuro las funciones que importo de controller, la lógica que usaría con prisma
   const { getUser, getUserById, createUser, updateUser, deleteUser } = userController()
 
   userRouter.route('/')
