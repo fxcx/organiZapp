@@ -23,8 +23,29 @@ export const userController = () => {
       await prisma.$disconnect()
     }
   }
+  
+  const updateUser = async (req, res, next) => {
+    try{
+      const { id } = req.params
+      const userUpdated = await prisma.user.update({
+        where: {
+          id: Number(id)
+        }
+      })
+      res.status(httpStatus.OK).json({
+        success: true,
+        message: 'User Updated',
+        data: userUpdated
+      })
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
 
   return {
+    updateUser,
     deleteUser
   }
 }

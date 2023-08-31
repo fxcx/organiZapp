@@ -3,7 +3,7 @@ import { taskController } from '../controllers/taskController'
 
 export const taskRouter = () => {
   const taskRouter = Router()
-  // destructuro las funciones que vienen controller, la logica que usaria con prisma
+  // desestructuro las funciones que importo de controller, la lógica que usaría con prisma
   const { getTask, getTaskById, createTask, updateTask, deleteTask } = taskController()
 
   taskRouter.route('/task')
