@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import errorHandler from './middleware/errorHandler.js'
-import { userRouter } from './routers/userRouter.js'
+import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
 dotenv.config()
 const PORT = process.env.PORT || 3000
