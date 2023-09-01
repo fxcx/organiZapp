@@ -61,6 +61,9 @@ export const taskController = () => {
       const user = await prisma.user.findUnique({
         where: {
           id: Number(id)
+        },
+        include: {
+          user: true
         }
       })
       res.status(httpStatus.OK).json(user)
@@ -73,13 +76,14 @@ export const taskController = () => {
 
   const createTask = async (req, res, next) => {
     try {
-      const { username, email, password, birthYear } = req.body
+      const { tasKuserId, taskName, title, date, status } = req.body
       const user = await prisma.user.create({
         data: {
-          username,
-          email,
-          password,
-          birthYear
+          tasKuserId,
+          taskName,
+          title,
+          date,
+          status
         }
       })
 
