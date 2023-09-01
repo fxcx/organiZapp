@@ -44,8 +44,58 @@ export const taskController = () => {
     }
   }
 
+  const getTask = async (_req, res, next) => {
+    try {
+      const users = await prisma.user.findMany()
+      res.status(httpStatus.OK).json(users)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
+  const getTaskById = async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const user = await prisma.user.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })
+      res.status(httpStatus.OK).json(user)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
+  const createTask = async (req, res, next) => {
+    try {
+      const { username, email, password, birthYear } = req.body
+      const user = await prisma.user.create({
+        data: {
+          username,
+          email,
+          password,
+          birthYear
+        }
+      })
+
+      res.status(httpStatus.CREATED).json(user)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
   return {
     updateTask,
-    deleteTask
+    deleteTask,
+    getTask,
+    getTaskById,
+    createTask
   }
 }

@@ -23,9 +23,9 @@ export const userController = () => {
       await prisma.$disconnect()
     }
   }
-  
+
   const updateUser = async (req, res, next) => {
-    try{
+    try {
       const { id } = req.params
       const userUpdated = await prisma.user.update({
         where: {
@@ -44,8 +44,58 @@ export const userController = () => {
     }
   }
 
+  const getUser = async (_req, res, next) => {
+    try {
+      const users = await prisma.user.findMany()
+      res.status(httpStatus.OK).json(users)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
+  const getUserById = async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const user = await prisma.user.findUnique({
+        where: {
+          id: Number(id)
+        }
+      })
+      res.status(httpStatus.OK).json(user)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
+  const createUser = async (req, res, next) => {
+    try {
+      const { username, email, password, birthYear } = req.body
+      const user = await prisma.user.create({
+        data: {
+          username,
+          email,
+          password,
+          birthYear
+        }
+      })
+
+      res.status(httpStatus.CREATED).json(user)
+    } catch (error) {
+      next(error)
+    } finally {
+      await prisma.$disconnect()
+    }
+  }
+
   return {
     updateUser,
-    deleteUser
+    deleteUser,
+    getUser,
+    getUserById,
+    createUser
   }
 }
