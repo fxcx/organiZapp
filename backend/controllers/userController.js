@@ -61,6 +61,9 @@ export const userController = () => {
       const user = await prisma.user.findUnique({
         where: {
           id: Number(id)
+        },
+        include: {
+          tasks: true
         }
       })
       res.status(httpStatus.OK).json(user)
