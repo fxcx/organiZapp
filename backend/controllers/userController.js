@@ -1,5 +1,5 @@
 import { prisma } from '../database/prisma.js'
-import addSoftDelete from '../middlewares/softDelete.js'
+import addSoftDelete from '../middleware/softDelete.js'
 import httpStatus from '../utils/httpStatus.js'
 
 export const userController = () => {

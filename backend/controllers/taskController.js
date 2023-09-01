@@ -1,6 +1,6 @@
 import prisma from '../database/prisma.js'
-import addSoftDelete from '../middlewares/softDelete.js'
-import httpStatus from '../utils/httpStatus.js'
+import addSoftDelete from '../middleware/softDelete.js'
+import httpStatus from '../helpers/httpStatus.js'
 
 export const taskController = () => {
   const deleteTask = async (req, res, next) => {
