@@ -1,4 +1,4 @@
-import prisma from '../database/prisma.js'
+import { prisma } from '../database/prisma.js'
 import addSoftDelete from '../middlewares/softDelete.js'
 import httpStatus from '../utils/httpStatus.js'
 

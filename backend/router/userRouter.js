@@ -6,7 +6,7 @@ export const userRouter = () => {
   // desestructuro las funciones que importo de controller, la lógica que usaría con prisma
   const { getUser, getUserById, createUser, updateUser, deleteUser } = userController()
 
-  userRouter.route('/')
+  userRouter.route('/user')
     .get(getUser)
     .post(createUser)
 
