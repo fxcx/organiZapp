@@ -1,6 +1,6 @@
-import { prisma } from '../database/prisma.js'
+import prisma from '../database/prisma.js'
 import addSoftDelete from '../middleware/softDelete.js'
-import httpStatus from '../utils/httpStatus.js'
+import httpStatus from '../helpers/httpStatus.js'
 
 export const userController = () => {
   const deleteUser = async (req, res, next) => {
