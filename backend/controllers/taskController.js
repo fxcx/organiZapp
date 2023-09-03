@@ -47,7 +47,7 @@ export const taskController = () => {
   const getTask = async (_req, res, next) => {
     try {
       const users = await prisma.user.findMany()
-      res.status(httpStatus.OK).json(users)
+      return res.status(httpStatus.OK).json(users)
     } catch (error) {
       next(error)
     } finally {
@@ -66,7 +66,7 @@ export const taskController = () => {
           user: true
         }
       })
-      res.status(httpStatus.OK).json(user)
+      return res.status(httpStatus.OK).json(user)
     } catch (error) {
       next(error)
     } finally {
@@ -87,7 +87,7 @@ export const taskController = () => {
         }
       })
 
-      res.status(httpStatus.CREATED).json(user)
+      return res.status(httpStatus.CREATED).json(user)
     } catch (error) {
       next(error)
     } finally {
