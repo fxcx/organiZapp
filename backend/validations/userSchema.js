@@ -6,7 +6,7 @@ export const userParamsSchema = Joi.object({
     .min(0)
 })
 
-export const attackSchema = Joi.object({
+export const userSchema = Joi.object({
   username: Joi.string()
     .min(3)
     .required,
