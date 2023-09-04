@@ -1,6 +1,7 @@
 import prisma from '../database/prisma.js'
 import addSoftDelete from '../middleware/softDelete.js'
 import httpStatus from '../helpers/httpStatus.js'
+import bcrypt from 'bcrypt'
 
 export const userController = () => {
   const deleteUser = async (req, res, next) => {
@@ -27,9 +28,15 @@ export const userController = () => {
   const updateUser = async (req, res, next) => {
     try {
       const { id } = req.params
+      const { username, email, password } = req.body
       const userUpdated = await prisma.user.update({
         where: {
           id: Number(id)
+        },
+        data: {
+          username,
+          email,
+          password: await bcrypt.hash(password, 10)
         }
       })
       res.status(httpStatus.OK).json({
@@ -77,11 +84,13 @@ export const userController = () => {
   const createUser = async (req, res, next) => {
     try {
       const { username, email, password, birthYear } = req.body
+      const salt = await bcrypt.genSalt(10)
+      const hashedPassword = await bcrypt.hash(password, salt)
       const user = await prisma.user.create({
         data: {
           username,
           email,
-          password,
+          password: hashedPassword,
           birthYear: new Date(birthYear)
         }
       })
