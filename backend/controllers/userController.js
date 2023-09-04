@@ -82,11 +82,10 @@ export const userController = () => {
           username,
           email,
           password,
-          birthYear
+          birthYear: new Date(birthYear)
         }
       })
-
-      res.status(httpStatus.CREATED).json(user)
+      return res.status(httpStatus.CREATED).json(user)
     } catch (error) {
       next(error)
     } finally {
