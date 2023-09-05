@@ -53,7 +53,11 @@ export const userController = () => {
 
   const getUser = async (_req, res, next) => {
     try {
-      const users = await prisma.user.findMany()
+      const users = await prisma.user.findMany({
+        where: {
+          deletedAt: null
+        }
+      })
       res.status(httpStatus.OK).json(users)
     } catch (error) {
       next(error)
@@ -65,9 +69,10 @@ export const userController = () => {
   const getUserById = async (req, res, next) => {
     try {
       const { id } = req.params
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: {
-          id: Number(id)
+          id: Number(id),
+          deletedAt: null
         },
         include: {
           tasks: true
@@ -94,7 +99,11 @@ export const userController = () => {
           birthYear: new Date(birthYear)
         }
       })
-      return res.status(httpStatus.CREATED).json(user)
+      return res.status(httpStatus.CREATED).json({
+        success: true,
+        data: user,
+        message: 'User Created'
+      })
     } catch (error) {
       next(error)
     } finally {

@@ -11,27 +11,29 @@ datasource db {
 }
 
 
-model user {
+model User {
   id          Int       @id @default(autoincrement())
   username    String
   password    String
-  email       String
-  birthYear   DateTime @map ("birth_year")
-  createdAt   DateTime   @map ("created_at")
+  email       String    @unique
+  birthYear   DateTime  @map ("birth_year")
+  createdAt   DateTime  @default(now()) @map ("created_at")
   updatedAt   DateTime  @updatedAt @map ("update_at")
   deletedAt   DateTime? @map ("delete_At")
-  tasks       task[]    
+  tasks       Tasks[]   
+  @@map("user")  
 }
 
-model task {
+model Tasks {
   id           Int       @id @default(autoincrement())
-  taskuserId   Int      @map ("task_user_id")
-  taskName    String @map("task_name") 
+  taskName     String    @map("task_name") 
   title        String
   date         DateTime
   status       String
-  createdAt    DateTime  @map("created_at")
+  createdAt    DateTime  @default(now())   @map("created_at")
   updatedAt    DateTime  @updatedAt @map ("update_at")
   deletedAt    DateTime? @map ("deleted_at")
-  user         user      @relation(fields: [taskuserId], references: [id]) 
+  userId       Int       @map("user_id") 
+  user         User      @relation(fields: [userId], references: [id])
+  @@map("task") 
 }
