@@ -1,6 +1,7 @@
 import prisma from '../database/prisma.js'
 import addSoftDelete from '../middleware/softDelete.js'
 import httpStatus from '../helpers/httpStatus.js'
+import bcrypt from 'bcrypt'
 
 export const userController = () => {
   const deleteUser = async (req, res, next) => {
@@ -12,7 +13,7 @@ export const userController = () => {
           id: Number(id)
         }
       })
-      res.status(httpStatus.FOUND).json({
+      res.status(httpStatus.OK).json({
         success: true,
         message: 'User Deleted',
         data: userDeleted
@@ -27,9 +28,15 @@ export const userController = () => {
   const updateUser = async (req, res, next) => {
     try {
       const { id } = req.params
+      const { username, email, password } = req.body
       const userUpdated = await prisma.user.update({
         where: {
           id: Number(id)
+        },
+        data: {
+          username,
+          email,
+          password: await bcrypt.hash(password, 10)
         }
       })
       res.status(httpStatus.OK).json({
@@ -46,7 +53,11 @@ export const userController = () => {
 
   const getUser = async (_req, res, next) => {
     try {
-      const users = await prisma.user.findMany()
+      const users = await prisma.user.findMany({
+        where: {
+          deletedAt: null
+        }
+      })
       res.status(httpStatus.OK).json(users)
     } catch (error) {
       next(error)
@@ -58,9 +69,10 @@ export const userController = () => {
   const getUserById = async (req, res, next) => {
     try {
       const { id } = req.params
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: {
-          id: Number(id)
+          id: Number(id),
+          deletedAt: null
         },
         include: {
           tasks: true
@@ -77,16 +89,21 @@ export const userController = () => {
   const createUser = async (req, res, next) => {
     try {
       const { username, email, password, birthYear } = req.body
+      const salt = await bcrypt.genSalt(10)
+      const hashedPassword = await bcrypt.hash(password, salt)
       const user = await prisma.user.create({
         data: {
           username,
           email,
-          password,
-          birthYear
+          password: hashedPassword,
+          birthYear: new Date(birthYear)
         }
       })
-
-      res.status(httpStatus.CREATED).json(user)
+      return res.status(httpStatus.CREATED).json({
+        success: true,
+        data: user,
+        message: 'User Created'
+      })
     } catch (error) {
       next(error)
     } finally {
