@@ -1,5 +1,5 @@
-import { taskSchema, taskParamsSchema } from '../validations/taskSchema'
-import { userSchema, userParamsSchema } from '../validations/userSchema'
+import { taskSchema, taskParamsSchema } from '../validations/taskSchema.js'
+import { userSchema, userParamsSchema } from '../validations/userSchema.js'
 
 // Task Validations
 export const taskValidation = (req, _res, next) => {

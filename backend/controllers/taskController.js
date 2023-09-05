@@ -12,7 +12,7 @@ export const taskController = () => {
           id: Number(id)
         }
       })
-      res.status(httpStatus.FOUND).json({
+      res.status(httpStatus.OK).json({
         success: true,
         message: 'Task Deleted',
         data: taskDeleted

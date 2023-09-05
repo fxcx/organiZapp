@@ -13,7 +13,7 @@ export const userController = () => {
           id: Number(id)
         }
       })
-      res.status(httpStatus.FOUND).json({
+      res.status(httpStatus.OK).json({
         success: true,
         message: 'User Deleted',
         data: userDeleted

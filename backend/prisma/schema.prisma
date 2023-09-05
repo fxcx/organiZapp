@@ -16,7 +16,7 @@ model user {
   username    String
   password    String
   email       String
-  birthYear  DateTime @map ("birth_year")
+  birthYear   DateTime @map ("birth_year")
   createdAt   DateTime   @map ("created_at")
   updatedAt   DateTime  @updatedAt @map ("update_at")
   deletedAt   DateTime? @map ("delete_At")
@@ -25,7 +25,7 @@ model user {
 
 model task {
   id           Int       @id @default(autoincrement())
-  taskuserId  Int      @map ("task_user_id")
+  taskuserId   Int      @map ("task_user_id")
   taskName    String @map("task_name") 
   title        String
   date         DateTime
