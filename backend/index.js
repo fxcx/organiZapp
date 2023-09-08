@@ -1,4 +1,5 @@
 import express from 'express'
+import { server } from 'socket.io'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import errorHandler from './middleware/errorHandler.js'
