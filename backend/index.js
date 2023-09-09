@@ -13,11 +13,19 @@ app.use(express.json())
 
 const serverSocket = http.createServer(app)
 const io = new Server(serverSocket)
+
 io.on('conection', socket => {
   console.log('cliente conectado')
+
+  socket.on('message', (body) => {
+    socket.broadcast.emit('message', {
+      body,
+      from: socket.id
+    })
+  })
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 // router method
 app.use('/api', userRouter(), taskRouter())
