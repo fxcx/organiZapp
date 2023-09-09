@@ -5,7 +5,6 @@ import errorHandler from './middleware/errorHandler.js'
 import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
 
-import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -15,16 +14,16 @@ app.use(express.json())
 const serverSocket = http.createServer(app)
 const io = new Server(serverSocket)
 
-const PORT = process.env.PORT || 4000
-
-// conexión a diferentes dominios o host
-app.use(cors())
+const PORT = process.env.PORT || 3000
 
 // router method
 app.use('/api', userRouter(), taskRouter())
 // manejo de errores
 app.use(errorHandler)
 
+io.on('conection', socket => {
+  console.log('cliente conectado')
+})
 serverSocket.listen(PORT, () => {
   console.log(`el server se levanto ${PORT}`)
 })
