@@ -6,7 +6,7 @@ import io from "socket.io-client";
 // const socket = io("http://localhost:3001");
 const socket = io("/");
 
-export default function App() {
+export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -36,7 +36,7 @@ export default function App() {
   return (
     <div>
       <form>
-        <h1>Chat React</h1>
+        <h1>organizapp</h1>
         <input
           name="message"
           type="text"

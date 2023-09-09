@@ -3,7 +3,7 @@ const nextConfig = {
     server:{
         proxy:{
             '/socket.io': {
-                target: 'http://localhost:4000/',
+                target: 'http://localhost:3000/',
                 ws: true
             }
         }

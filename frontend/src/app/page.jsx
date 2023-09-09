@@ -2,6 +2,10 @@ import Chat from './chat/page'
 
 export default function Home() {
   return (
-     <Chat></Chat>
+    <>
+    <h1>Chat</h1>
+    <Chat/>
+    </>
+
   )
 }

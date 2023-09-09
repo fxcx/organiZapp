@@ -13,6 +13,9 @@ app.use(express.json())
 
 const serverSocket = http.createServer(app)
 const io = new Server(serverSocket)
+io.on('conection', socket => {
+  console.log('cliente conectado')
+})
 
 const PORT = process.env.PORT || 3000
 
@@ -21,9 +24,6 @@ app.use('/api', userRouter(), taskRouter())
 // manejo de errores
 app.use(errorHandler)
 
-io.on('conection', socket => {
-  console.log('cliente conectado')
-})
 serverSocket.listen(PORT, () => {
   console.log(`el server se levanto ${PORT}`)
 })
