@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     server:{
-        proxy:{
+        source:{
             '/socket.io': {
-                target: 'http://localhost:4000/',
-                ws: true
+                destination: 'http://localhost:3000/'
             }
         }
     }

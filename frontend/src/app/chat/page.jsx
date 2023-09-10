@@ -9,18 +9,14 @@ const socket = io("/");
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-
+  
   useEffect(() => {
-    socket.on("message", receiveMessage)
-
-    return () => {
-      socket.off("message", receiveMessage);
-    };
-  }, []);
-
-  const receiveMessage = (message) =>
-    setMessages(state => [message, ...state]);
-
+     socket.on("message", receiveMessage)
+ 
+     return () => {
+       socket.off("message", receiveMessage);
+     };
+   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,6 +24,15 @@ export default function Chat() {
       body: message,
       from: "Me",
     };
+
+   setMessage([...message, newMessage])
+   socket.emit("message", message)
+
+
+  const receiveMessage = (message) =>
+    setMessages(state => [message, ...state]);
+
+
     setMessages(state => [newMessage, ...state]);
     setMessage("");
     socket.emit("message", newMessage.body);
