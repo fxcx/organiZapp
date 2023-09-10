@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { taskController } from '../controllers/taskController.js'
+import { taskValidation, taskParamsValidation, userValidation, userParamsValidation } from '../middleware/validations'
 
 export const taskRouter = () => {
   const taskRouter = Router()
@@ -8,11 +9,11 @@ export const taskRouter = () => {
 
   taskRouter.route('/task')
     .get(getTask)
-    .post(createTask)
+    .post(userParamsValidation, userValidation, createTask)
 
   taskRouter.route('/task/:id')
     .get(getTaskById)
-    .put(updateTask)
+    .put(taskParamsValidation, taskValidation, updateTask)
     .delete(deleteTask)
 
   return taskRouter
