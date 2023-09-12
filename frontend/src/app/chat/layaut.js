@@ -1,8 +1,9 @@
-// layaut que solo se ve en el chat
-export default function ChatLayaut ( {children} ) {
+import ChatSideBar from '@/components/Chat/chat-sidebar'
+
+export default function ChatLayaut ({children}) {
     return(
         <>
-        <aside>mostrar salas o usarios</aside>
+        <ChatSideBar/>
         {children}
         </>
     )
