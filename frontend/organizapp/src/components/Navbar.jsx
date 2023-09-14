@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 function NavBar() {
@@ -87,86 +88,46 @@ function NavBar() {
             ></path>
           </svg>
         </Link>
-    
-            <div className="lg:hidden">
-              <button className="navbar-burger flex items-center text-green-400 p-3">
-                <svg
-                  className="block h-4 w-4 fill-current"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Mobile menu</title>
-                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-                </svg>
-              </button>
-            </div> {session?.user ? (
+        <div className="lg:hidden">
+          <button className="navbar-burger flex items-center text-green-400 p-3">
+            <svg
+              className="block h-4 w-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Mobile menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+          </button>
+        </div>{" "}
+        {session?.user ? (
           <>
-            <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+            <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
               <li>
-                <a className="text-sm text-white font-bold" href="#">
+                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
                   Home
                 </a>
               </li>
               <li className="text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 current-fill"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010-2z"
-                  ></path>
-                </svg>
               </li>
               <li>
-                <Link className="text-sm text-white font-bold" href="#">
+                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
                   Chat
                 </Link>
               </li>
               <li className="text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 current-fill"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010-2zm0 7a1 1 0 110-2 1 1 0 010-2z"
-                  ></path>
-                </svg>
+      
               </li>
               <li>
-                <a className="text-sm text-white font-bold" href="#">
+                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
                   Callendary
                 </a>
               </li>
               <li className="text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 current-fill"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010-2zm0 7a1 1 0 110-2 1 1 0 010-2zm0 7a1 1 0 110-2 1 1 0 010-2z"
-                  ></path>
-                </svg>
+
               </li>
               <li>
-                <Link className="text-sm text-white font-bold" href="#">
+                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
                   Contact
                 </Link>
               </li>
@@ -175,10 +136,14 @@ function NavBar() {
               <p className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl ">
                 {session.user.name}
               </p>
-              <img
+              <Image
                 src={session.user.image}
                 className="w-10 h-10 rounded-full lg:inline-block mx-0"
-              ></img>
+                quality={100}
+                width={100}
+                height={100}
+                alt=""
+              ></Image>
 
               <button
                 onClick={() => signOut()}
@@ -204,14 +169,14 @@ function NavBar() {
             </Link>
           </>
         )}
-
       </nav>
       <div className="navbar-menu relative z-50 hidden">
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
 
         <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
-          {session?.user ? ( 
-            <><div className="flex items-center mb-8">
+          {session?.user ? (
+            <>
+              <div className="flex items-center mb-8">
                 <a className="mr-auto text-3xl font-bold leading-none" href="#">
                   <svg className="h-12" alt="logo" viewBox="0 0 10240 10240">
                     <path
@@ -236,58 +201,58 @@ function NavBar() {
                     ></path>
                   </svg>
                 </button>
-              </div><div>
-                  <ul>
-                    <li className="mb-1">
-                      <Link
-                        className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                        href="#"
-                      >
-                        Home
-                      </Link>
-                    </li>
-                    <li className="mb-1">
-                      <Link
-                        className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                        href="#"
-                      >
-                        Chat
-                      </Link>
-                    </li>
-                    <li className="mb-1">
-                      <Link
-                        className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                        href="#"
-                      >
-                        Callendary
-                      </Link>
-                    </li>
-                    <li className="mb-1">
-                      <Link
-                        className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                        href="#"
-                      >
-                        Contact
-                      </Link>
-                    </li>
+              </div>
+              <div className="my-2">
+                <ul>
                   <li className="mb-1">
-                  <button
-                onClick={() => signOut()}
-                className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
-              >
-                Logout
-              </button>
-                    </li>
-                  </ul>
-
-                </div></>
+                    <Link
+                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                      href="#"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link
+                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                      href="#"
+                    >
+                      Chat
+                    </Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link
+                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                      href="#"
+                    >
+                      Callendary
+                    </Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link
+                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                      href="#"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                  <li className="mb-1">
+                    <button
+                      onClick={() => signOut()}
+                      className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </>
           ) : (
             <>
-           <div className="mt-auto">
-              <div className="pt-6">
-                
+              <div className="mt-auto">
+                <div className="pt-6">
                   <Link
-                    className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                    className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
                     href="#"
                   >
                     <button onClick={() => signIn()}>Sign In</button>
@@ -298,12 +263,13 @@ function NavBar() {
                   >
                     Sign Up
                   </Link>
+                </div>
               </div>
-            </div> 
-            </> )}
-        </nav>   
+            </>
+          )}
+        </nav>
       </div>
     </>
-          )
-} 
+  );
+}
 export default NavBar;
