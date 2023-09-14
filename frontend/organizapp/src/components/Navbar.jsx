@@ -77,10 +77,88 @@ function NavBar() {
     };
   }, []);
 
+  const renderAuthNavbar = (
+    <>
+      <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+        <li>
+          <a
+            className="text-sm text-white font-bold hover:text-gray-300"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li className="text-gray-300"></li>
+        <li>
+          <Link
+            className="text-sm text-white font-bold hover:text-gray-300"
+            href="#"
+          >
+            Chat
+          </Link>
+        </li>
+        <li className="text-gray-300"></li>
+        <li>
+          <a
+            className="text-sm text-white font-bold hover:text-gray-300"
+            href="/callendary"
+          >
+            Callendary
+          </a>
+        </li>
+        <li className="text-gray-300"></li>
+        <li>
+          <Link
+            className="text-sm text-white font-bold hover:text-gray-300"
+            href="/contact"
+          >
+            Contact
+          </Link>
+        </li>
+      </ul>
+      <div className="flex ">
+        <p className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl ">
+          {session?.user?.name}
+        </p>
+        <Image
+          src={session?.user?.image}
+          className="w-10 h-10 rounded-full lg:inline-block mx-0"
+          quality={100}
+          width={100}
+          height={100}
+          alt=""
+        ></Image>
+
+        <button
+          onClick={() => signOut()}
+          className="hidden lg:inline-block space-x-0.5 py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 mx-10"
+        >
+          Logout
+        </button>
+      </div>
+    </>
+  );
+  const renderCommonNavbar = (
+    <>
+      <Link
+        className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+        href="#"
+      >
+        <button onClick={() => signIn()}>Sign In</button>
+      </Link>
+      <Link
+        className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200"
+        href="#"
+      >
+        Sign up
+      </Link>
+    </>
+  );
+
   return (
     <>
       <nav className="relative px-4 py-4 flex justify-between items-center bg-green-600">
-        <Link className="text-3xl font-bold leading-none" href="#">
+        <Link className="text-3xl font-bold leading-none" href="/">
           <svg className="h-10" alt="logo" viewBox="0 0 10240 10240">
             <path
               xmlns="http://www.w3.org/2000/svg"
@@ -99,76 +177,8 @@ function NavBar() {
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
             </svg>
           </button>
-        </div>{" "}
-        {session?.user ? (
-          <>
-            <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
-              <li>
-                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="text-gray-300">
-              </li>
-              <li>
-                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
-                  Chat
-                </Link>
-              </li>
-              <li className="text-gray-300">
-      
-              </li>
-              <li>
-                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
-                  Callendary
-                </a>
-              </li>
-              <li className="text-gray-300">
-
-              </li>
-              <li>
-                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-            <div className="flex ">
-              <p className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl ">
-                {session.user.name}
-              </p>
-              <Image
-                src={session.user.image}
-                className="w-10 h-10 rounded-full lg:inline-block mx-0"
-                quality={100}
-                width={100}
-                height={100}
-                alt=""
-              ></Image>
-
-              <button
-                onClick={() => signOut()}
-                className="hidden lg:inline-block space-x-0.5 py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 mx-10"
-              >
-                Logout
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <Link
-              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-              href="#"
-            >
-              <button onClick={() => signIn()}>Sign In</button>
-            </Link>
-            <Link
-              className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200"
-              href="#"
-            >
-              Sign up
-            </Link>
-          </>
-        )}
+        </div>
+        {session?.user ? renderAuthNavbar: renderCommonNavbar}
       </nav>
       <div className="navbar-menu relative z-50 hidden">
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -194,9 +204,9 @@ function NavBar() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                     ></path>
                   </svg>
@@ -207,7 +217,7 @@ function NavBar() {
                   <li className="mb-1">
                     <Link
                       className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="#"
+                      href="/"
                     >
                       Home
                     </Link>
@@ -215,7 +225,7 @@ function NavBar() {
                   <li className="mb-1">
                     <Link
                       className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="#"
+                      href="/chat"
                     >
                       Chat
                     </Link>
@@ -223,7 +233,7 @@ function NavBar() {
                   <li className="mb-1">
                     <Link
                       className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="#"
+                      href="/chat"
                     >
                       Callendary
                     </Link>
@@ -231,7 +241,7 @@ function NavBar() {
                   <li className="mb-1">
                     <Link
                       className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="#"
+                      href="/contact"
                     >
                       Contact
                     </Link>
