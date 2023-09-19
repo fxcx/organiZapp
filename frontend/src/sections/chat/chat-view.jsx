@@ -1,60 +1,97 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import moment from "moment";
 
-const socket = io("localhost:4000", {
-  autoConnect:true
+
+const socket = io("http://localhost:4000", {
+  transports: ["websocket", "polling"]
 });
 
+const username = prompt("what is your username");
+
 export default function ChatView() {
+  const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newMessageInfo = {
-      body: newMessage,
-      from: "Me",
-    };
-    setMessages([...messages, newMessageInfo]);
-    socket.emit("message", newMessage)
-    setNewMessage("")
-  };
-
-  const receiveMessage = (message) => {
-    setNewMessages((previousMessages) => [...previousMessages, message]);
-  }
 
   useEffect(() => {
-    socket.on("message", receiveMessage);
+    socket.on("connect", () => {
+      socket.emit("username", username);
+    });
 
-    return () => {
-      socket.off("message", receiveMessage);
-    };
+    socket.on("users", users => {
+      setUsers(users);
+    });
+
+    socket.on("message", message => {
+      setMessages(messages => [...messages, message]);
+    });
+
+    socket.on("connected", user => {
+      setUsers(users => [...users, user]);
+    });
+
+    socket.on("disconnected", id => {
+      setUsers(users => {
+        return users.filter(user => user.id !== id);
+      });
+    });
   }, []);
 
+  const submit = event => {
+    event.preventDefault();
+    socket.emit("send", message);
+    setMessage("");
+  };
 
-  
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h1>organizapp</h1>
-        <input
-          type="text"
-          placeholder="Write your message..."
-          onChange={(evento) => setNewMessages(evento.target.value)}
-          className="border-2 border-zinc-500 p-2 w-full text-black"
-          value={newMessage}
-          autoFocus
-        />
-        <button type="submit">send</button>
-      </form>
-      <ul>
-        {messages.map((msg, index) => (
-          <li key={index}>{msg.from}: {msg.body}</li>
-         ))}
-      </ul>
+      <div>
+        <div >
+          <h6>Hello {username}</h6>
+        </div>
+      </div>
+      <div >
+        <div>
+          <h6>Messages</h6>
+          <div id="messages">
+            {messages.map(({ user, date, text }, index) => (
+              <div key={index}>
+                <div>
+                  {moment(date).format("h:mm:ss a")}
+                </div>
+                <div >{user.name}</div>
+                <div >{text}</div>
+              </div>
+            ))}
+          </div>
+          <form onSubmit={submit} id="form">
+            <div>
+              <input
+                type="text"
+                onChange={e => setMessage(e.currentTarget.value)}
+                value={message}
+                id="text"
+              />
+              
+                <button id="submit" type="submit" >
+                  Send
+                </button>
+           
+            </div>
+          </form>
+        </div>
+        <div >
+          <h6>Users</h6>
+          <ul id="users">
+            {users.map(({ name, id }) => (
+              <li key={id}>{name}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
-}
+};

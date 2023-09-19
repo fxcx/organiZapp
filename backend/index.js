@@ -1,13 +1,14 @@
 import express from 'express'
 // import { readFileSync } from 'fs'
 // import https from 'https'
-import http from 'http'
+import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
 import errorHandler from './middleware/errorHandler.js'
 import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
 import dotenv from 'dotenv'
+
 dotenv.config()
 
 const app = express()
@@ -20,21 +21,42 @@ const PORT = process.env.PORT || 4000
 //   cert: readFileSync('./certificates/cert.pem', 'utf-8')
 // })
 
-const server = http.createServer(app)
+const server = createServer(app)
 
 const io = new Server(server, {
   cors: {
-    origin: 'localhost:3000',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
 })
 
-io.on('connection', (socket) => {
-  console.log('hola estas conectado')
+const users = {}
+
+io.on('connection', client => {
+  client.on('username', username => {
+    const user = {
+      name: username,
+      id: client.id
+    }
+    users[client.id] = user
+    io.emit('connected', user)
+    io.emit('users', Object.values(users))
+  })
+
+  client.on('send', message => {
+    io.emit('message', {
+      text: message,
+      date: new Date().toISOString(),
+      user: users[client.id]
+    })
+  })
+
+  client.on('disconnect', () => {
+    const username = users[client.id]
+    delete users[client.id]
+    io.emit('disconnected', client.id)
+  })
 })
-
-io.emit()
-
 // router
 app.use('/api', userRouter(), taskRouter())
 // manejo de errores
