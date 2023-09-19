@@ -4,15 +4,22 @@ import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
+import dotenv from 'dotenv'
+import { expressjwt as jwt } from 'express-jwt'
 import errorHandler from './middleware/errorHandler.js'
 import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
-import dotenv from 'dotenv'
 
 dotenv.config()
 
 const app = express()
 app.use(express.json())
+app.use(jwt({
+  secret: process.env.SECRET_KEY,
+  algorithms: ['HS256']
+}).unless({ path: ['/api/auth/login', 'api/auth/refresh'] })
+)
+// router method
 app.use(cors())
 const PORT = process.env.PORT || 4000
 
