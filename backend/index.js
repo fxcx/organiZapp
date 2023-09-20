@@ -14,12 +14,13 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
+
 app.use(jwt({
   secret: process.env.SECRET_KEY,
   algorithms: ['HS256']
 }).unless({ path: ['/api/auth/login', 'api/auth/refresh'] })
 )
-// router method
+
 app.use(cors())
 const PORT = process.env.PORT || 4000
 

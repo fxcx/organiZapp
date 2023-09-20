@@ -4,7 +4,6 @@ import { taskValidation, taskParamsValidation, userValidation, userParamsValidat
 
 export const taskRouter = () => {
   const taskRouter = Router()
-  // desestructuro las funciones que importo de controller, la lógica que usaría con prisma
   const { getTask, getTaskById, createTask, updateTask, deleteTask } = taskController()
 
   taskRouter.route('/task')
