@@ -1,6 +1,4 @@
 import express from 'express'
-// import { readFileSync } from 'fs'
-// import https from 'https'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
@@ -15,6 +13,7 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 
+// jwt
 app.use(jwt({
   secret: process.env.SECRET_KEY,
   algorithms: ['HS256']
@@ -23,11 +22,6 @@ app.use(jwt({
 
 app.use(cors())
 const PORT = process.env.PORT || 4000
-
-// const server = https.createServer(app, {
-//   key: readFileSync('./certificates/key.pem', 'utf-8'),
-//   cert: readFileSync('./certificates/cert.pem', 'utf-8')
-// })
 
 const server = createServer(app)
 
