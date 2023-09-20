@@ -2,6 +2,6 @@
 
 export default function Home() {
   return (
-    <div className="my-2">  </div>
+    <h1>esto seria la landing page</h1>
   )
 }
