@@ -3,7 +3,7 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { expressjwt as jwt } from 'express-jwt'
+// import { expressjwt as jwt } from 'express-jwt'
 import errorHandler from './middleware/errorHandler.js'
 import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
@@ -14,11 +14,11 @@ const app = express()
 app.use(express.json())
 
 // jwt
-app.use(jwt({
-  secret: process.env.SECRET_KEY,
-  algorithms: ['HS256']
-}).unless({ path: ['/api/auth/login', 'api/auth/refresh'] })
-)
+// app.use(jwt({
+//   secret: process.env.SECRET_KEY,
+//   algorithms: ['HS256']
+// }).unless({ path: ['/api/auth/login', 'api/auth/refresh'] })
+// )
 
 app.use(cors())
 const PORT = process.env.PORT || 4000

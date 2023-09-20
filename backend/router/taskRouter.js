@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { taskController } from '../controllers/taskController.js'
-import { taskValidation, taskParamsValidation, userValidation, userParamsValidation } from '../middleware/validations'
+import { taskValidation, taskParamsValidation, userValidation, userParamsValidation } from '../middleware/validations.js'
 
 export const taskRouter = () => {
   const taskRouter = Router()
