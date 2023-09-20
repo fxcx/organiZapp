@@ -1,4 +1,4 @@
-import ChatView from '@/sections/chat/chat-view'
+import ChatView from '../../sections/chat/chat-view'
 
 
 export default function Chat() {
