@@ -1,11 +1,13 @@
-
 export default function Privacy() {
   return (
-  
-      <>
-        <div className="m-4 p-4">
-        <h1 className="flex  text-center justify-evenly text-5xl my-10 ">Privacy Policy</h1>
-        <div className="underline font-bold text-xl my-4">Last updated: September 13, 2023</div>
+    <>
+      <div className="m-4 p-4">
+        <h1 className="flex  text-center justify-evenly text-5xl my-10 ">
+          Privacy Policy
+        </h1>
+        <div className="underline font-bold text-xl my-4">
+          Last updated: September 13, 2023
+        </div>
         <div className="my-2">
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
@@ -18,7 +20,9 @@ export default function Privacy() {
           accordance with this Privacy Policy. This Privacy Policy has been
           created with the help of the{" "}
         </div>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Interpretation and Definitions</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Interpretation and Definitions
+        </h1>
         <h2 className="font-bold text-lg">Interpretation:</h2>
         <div className="my-2">
           The words of which the initial letter is capitalized have meanings
@@ -31,24 +35,23 @@ export default function Privacy() {
         <ul className="list-disc">
           <li>
             <div className="my-2">
-              <strong>Account:</strong> means a unique account created for You to
-              access our Service or divarts of our Service.
+              <strong>Account:</strong> means a unique account created for You
+              to access our Service or divarts of our Service.
             </div>
           </li>
           <li>
             <div className="my-2">
               <strong>Affiliate:</strong> means an entity that controls, is
               controlled by or is under common control with a divarty, where
-              control means ownershidiv of 50% or more of the shares,
-              equity interest or other securities entitled to vote for election
-              of directors or other managing authority.
+              control means ownershidiv of 50% or more of the shares, equity
+              interest or other securities entitled to vote for election of
+              directors or other managing authority.
             </div>
           </li>
           <li>
             <div className="my-2">
-              <strong>Company:</strong> (referred to as either the
-              Company, We, Us or Our
-              in this Agreement) refers to organiZapp.
+              <strong>Company:</strong> (referred to as either the Company, We,
+              Us or Our in this Agreement) refers to organiZapp.
             </div>
           </li>
           <li>
@@ -126,9 +129,13 @@ export default function Privacy() {
             </div>
           </li>
         </ul>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Collecting and Using Your Personal Data</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Collecting and Using Your Personal Data
+        </h1>
         <h2>Types of Data Collected</h2>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Personal Data</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Personal Data
+        </h1>
         <div className="my-2">
           While using Our Service, We may ask You to provide Us with certain
           personally identifiable information that can be used to contact or
@@ -143,7 +150,9 @@ export default function Privacy() {
             <div className="font-bold">First name and last name</div>
           </li>
         </ul>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Usage Data</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Usage Data
+        </h1>
         <div className="my-2">
           Usage Data may include information such as Your Devices Internet
           Protocol address (e.g. IP address), browser type, browser version, the
@@ -191,7 +200,9 @@ export default function Privacy() {
           use, share, and store it in a manner consistent with this Privacy
           Policy.
         </div>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly" >Tracking Technologies and Cookies</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Tracking Technologies and Cookies
+        </h1>
         <div className="my-2">
           We use Cookies and similar tracking technologies to track the activity
           on Our Service and store certain information. Tracking technologies
@@ -219,11 +230,10 @@ export default function Privacy() {
           </li>
         </ul>
         <div className="my-2">
-          Cookies can be Persistent or Session& Cookies.
-          Persistent Cookies remain on Your personal computer or mobile device
-          when You go offline, while Session Cookies are deleted as soon as You
-          close Your web browser. Learn more about cookies on the
-          article.
+          Cookies can be Persistent or Session& Cookies. Persistent Cookies
+          remain on Your personal computer or mobile device when You go offline,
+          while Session Cookies are deleted as soon as You close Your web
+          browser. Learn more about cookies on the article.
         </div>
         <div className="my-2">
           We use both Session and Persistent Cookies for the purposes set out
@@ -277,7 +287,9 @@ export default function Privacy() {
           section of our Privacy Policy.
         </div>
         <h1>Use of Your Personal Data</h1>
-        <div className="my-2">The Company may use Personal Data for the following purposes:</div>
+        <div className="my-2">
+          The Company may use Personal Data for the following purposes:
+        </div>
         <ul className="list-disc">
           <li>
             <div className="my-2">
@@ -391,7 +403,9 @@ export default function Privacy() {
             information for any other purpose with Your consent.
           </li>
         </ul>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Retention of Your Personal Data</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Retention of Your Personal Data
+        </h1>
         <div className="my-2">
           The Company will retain Your Personal Data only for as long as is
           necessary for the purposes set out in this Privacy Policy. We will
@@ -448,7 +462,9 @@ export default function Privacy() {
           Please note, however, that We may need to retain certain information
           when we have a legal obligation or lawful basis to do so.
         </div>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Disclosure of Your Personal Data</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Disclosure of Your Personal Data
+        </h1>
         <h3 className="font-bold text-xl">Business Transactions</h3>
         <div className="my-2">
           If the Company is involved in a merger, acquisition or asset sale,
@@ -487,7 +503,9 @@ export default function Privacy() {
           acceptable means to protect Your Personal Data, We cannot guarantee
           its absolute security.
         </div>
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">Childrens Privacy</h1>
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Childrens Privacy
+        </h1>
         <div className="my-2">
           Our Service does not address anyone under the age of 13. We do not
           knowingly collect personally identifiable information from anyone
@@ -503,8 +521,10 @@ export default function Privacy() {
           require Your parents consent before We collect and use that
           information.
         </div>
- 
-        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly" >Contact Us</h1>
+
+        <h1 className="font-bold underline text-xl my-4 flex  text-center justify-evenly">
+          Contact Us
+        </h1>
         <div className="my-2">
           If you have any questions about this Privacy Policy, You can contact
           us:
@@ -521,7 +541,7 @@ export default function Privacy() {
             </a>
           </li>
         </ul>
-        </div>
-      </>
+      </div>
+    </>
   );
 }

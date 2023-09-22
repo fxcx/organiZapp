@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 function NavBar() {
   const { data: session } = useSession();
-  console.log(session);
+
   useEffect(() => {
     const handleBurgerClick = () => {
       const menus = document.querySelectorAll(".navbar-menu");
@@ -154,6 +154,100 @@ function NavBar() {
       </Link>
     </>
   );
+  const hamburguerAuthNavbar = (
+    <>
+      <div className="flex items-center mb-8">
+        <a className="mr-auto text-3xl font-bold leading-none" href="#">
+          <svg className="h-12" alt="logo" viewBox="0 0 10240 10240">
+            <path
+              xmlns="http://www.w3.org/2000/svg"
+              d="M8284 9162 c-2 -207 -55 -427 -161 -667 -147 -333 -404 -644 -733 -886 -81 -59 -247 -169 -256 -169 -3 0 -18"
+            ></path>
+          </svg>
+        </a>
+        <button className="navbar-close">
+          <svg
+            className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div className="my-2">
+        <ul>
+          <li className="mb-1">
+            <Link
+              className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+              href="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="mb-1">
+            <Link
+              className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+              href="/chat"
+            >
+              Chat
+            </Link>
+          </li>
+          <li className="mb-1">
+            <Link
+              className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+              href="/chat"
+            >
+              Callendary
+            </Link>
+          </li>
+          <li className="mb-1">
+            <Link
+              className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+              href="/contact"
+            >
+              Contact
+            </Link>
+          </li>
+          <li className="mb-1">
+            <button
+              onClick={() => signOut()}
+              className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
+            >
+              Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+  const hamburguerCommonNavbar = (
+    <>
+      <div className="mt-auto">
+        <div className="pt-6">
+          <Link
+            className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+            href="#"
+          >
+            <button onClick={() => signIn()}>Sign In</button>
+          </Link>
+          <Link
+            className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
+            href="#"
+          >
+            Sign Up
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -178,105 +272,12 @@ function NavBar() {
             </svg>
           </button>
         </div>
-        {session?.user ? renderAuthNavbar: renderCommonNavbar}
+        {session?.user ? renderAuthNavbar : renderCommonNavbar}
       </nav>
       <div className="navbar-menu relative z-50 hidden">
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-
         <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
-          {session?.user ? (
-            <>
-              <div className="flex items-center mb-8">
-                <a className="mr-auto text-3xl font-bold leading-none" href="#">
-                  <svg className="h-12" alt="logo" viewBox="0 0 10240 10240">
-                    <path
-                      xmlns="http://www.w3.org/2000/svg"
-                      d="M8284 9162 c-2 -207 -55 -427 -161 -667 -147 -333 -404 -644 -733 -886 -81 -59 -247 -169 -256 -169 -3 0 -18"
-                    ></path>
-                  </svg>
-                </a>
-                <button className="navbar-close">
-                  <svg
-                    className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-              <div className="my-2">
-                <ul>
-                  <li className="mb-1">
-                    <Link
-                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="/"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link
-                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="/chat"
-                    >
-                      Chat
-                    </Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link
-                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="/chat"
-                    >
-                      Callendary
-                    </Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link
-                      className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                      href="/contact"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                  <li className="mb-1">
-                    <button
-                      onClick={() => signOut()}
-                      className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="mt-auto">
-                <div className="pt-6">
-                  <Link
-                    className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
-                    href="#"
-                  >
-                    <button onClick={() => signIn()}>Sign In</button>
-                  </Link>
-                  <Link
-                    className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
-                    href="#"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              </div>
-            </>
-          )}
+          {session?.user ? hamburguerAuthNavbar : hamburguerCommonNavbar}
         </nav>
       </div>
     </>
