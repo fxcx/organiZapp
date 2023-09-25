@@ -101,9 +101,9 @@ function NavBar() {
         <li>
           <a
             className="text-sm text-white font-bold hover:text-gray-300"
-            href="/callendary"
+            href="/calendar"
           >
-            Callendary
+            Calendar
           </a>
         </li>
         <li className="text-gray-300"></li>
@@ -205,7 +205,7 @@ function NavBar() {
               className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
               href="/chat"
             >
-              Callendary
+              Calendar
             </Link>
           </li>
           <li className="mb-1">

@@ -1,4 +1,4 @@
-// File: /home/diegolopez02/organiZapp/frontend/organizapp/src/app/layout.js
+// File: /home/agustyn14/__dev/finalProyect/frontend/organizapp/src/app/layout.js
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
