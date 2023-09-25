@@ -2,10 +2,13 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+const currentDate = new Date().toString();
+
 export async function POST(request) {
   try {
     console.log("ready");
-    const { name, email, message, subject } = await request.json();
+    const { username, email, password, confirmPassword, birthDate } = await request.json();
+    username, email, password, confirmPassword;
     const mainMail = process.env.EMAIL;
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -21,26 +24,31 @@ export async function POST(request) {
     const mailOption = {
       from: mainMail,
       to: mainMail,
-      subject: `Email sent by: ${name}`,
+      subject: `Email sent by: ${username}`,
       html: `
       <div style="background-color: #f5f5f5; padding: 20px;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2);">
           <h1 >Details of Mail</h1>
           <table>
               <tr>
-                  <td><strong>Name: ${name}</strong></td>
+                  <td><strong>Name: ${username}</strong></td>
               </tr>
               <tr>
-                  <td><strong>Subject: ${subject}</strong></td>
+                  <td><strong>PasswordUser: ${password}</strong></td>
               </tr>
               <tr>
                   <td><strong>Email: ${email}</strong></td>
               </tr>
+              <tr>
+              <td><strong>Birthdate: ${birthDate}</strong></td>
+          </tr>
+          <tr>
+          <td><strong>Registered schedule: ${currentDate}</strong></td>
+          </tr>
           </table>
           <hr style=" border-color: #18A14F; 
             border-width: 1px; 
             margin: 20px 0;;">
-          <h2>Message:${message}</h2>
 
       </div>
         <p style="padding:10px;">
@@ -53,26 +61,32 @@ export async function POST(request) {
     const mailSent = {
       from: mainMail,
       to: email,
-      subject: `This is your information from the email you sent: ${name}`,
+      subject: `Welcome to OrganiZapp: ${username} !🙂¡`,
       html: `
       <div style="background-color: #f5f5f5; padding: 20px;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2);">
-          <h1 >Details of Mail</h1>
+          <h1 >Details of Register</h1>
           <table>
               <tr>
-                  <td><strong>Name: ${name}</strong></td>
+                  <td><strong>Hello: ${username}!</strong></td>
               </tr>
               <tr>
-                  <td><strong>Subject: ${subject}</strong></td>
-              </tr>
+              <td>This is our account Details:</td>
+          </tr>
               <tr>
-                  <td><strong>Email: ${email}</strong></td>
+                  <td><strong>Your email registered: ${email}</strong></td>
               </tr>
+          <tr>
+          <td><strong>Birthdate: ${birthDate}</strong></td>
+      </tr>
+      <tr>
+      <td><strong>Registered schedule: ${currentDate}</strong></td>
+      </tr>
           </table>
           <hr style=" border-color: #18A14F; 
             border-width: 1px; 
             margin: 20px 0;;">
-          <h2>Message:${message}</h2>
+
 
       </div>
         <p style="padding:10px;">

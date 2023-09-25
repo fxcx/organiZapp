@@ -6,10 +6,10 @@ export default function Succesfull() {
         <div className="rounded-full bg-green-100 h-32 w-32 mx-auto flex items-center justify-center">
           <i className="text-green-600 text-5xl checkmark">✓</i>
         </div>
-        <h1 className="text-green-600 text-3xl font-semibold mt-6">Success</h1>
+        <h1 className="text-green-600 text-3xl font-semibold mt-6">Success!</h1>
         <p className="text-gray-700 text-lg mt-2">
-          ¡We have received your email!!
-          <br /> We will contact you as soon as possible
+          ¡Welcome to OrganiZapp!
+          <br /> We are happy that you have our services 🙂
         </p>
         <Link href="/">
           <button
