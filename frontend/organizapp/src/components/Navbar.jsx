@@ -104,30 +104,37 @@ function NavBar() {
           <>
             <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
               <li>
-                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
+                <a
+                  className="text-sm text-white font-bold hover:text-gray-300"
+                  href="#"
+                >
                   Home
                 </a>
               </li>
-              <li className="text-gray-300">
-              </li>
+              <li className="text-gray-300"></li>
               <li>
-                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
+                <Link
+                  className="text-sm text-white font-bold hover:text-gray-300"
+                  href="#"
+                >
                   Chat
                 </Link>
               </li>
-              <li className="text-gray-300">
-      
-              </li>
+              <li className="text-gray-300"></li>
               <li>
-                <a className="text-sm text-white font-bold hover:text-gray-300" href="#">
+                <a
+                  className="text-sm text-white font-bold hover:text-gray-300"
+                  href="#"
+                >
                   Callendary
                 </a>
               </li>
-              <li className="text-gray-300">
-
-              </li>
+              <li className="text-gray-300"></li>
               <li>
-                <Link className="text-sm text-white font-bold hover:text-gray-300" href="#">
+                <Link
+                  className="text-sm text-white font-bold hover:text-gray-300"
+                  href="#"
+                >
                   Contact
                 </Link>
               </li>
