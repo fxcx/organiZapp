@@ -92,19 +92,19 @@ function NavBar() {
         <li>
           <Link
             className="text-sm text-white font-bold hover:text-gray-300"
-            href="#"
+            href="/chat"
           >
             Chat
           </Link>
         </li>
         <li className="text-gray-300"></li>
         <li>
-          <a
+          <Link
             className="text-sm text-white font-bold hover:text-gray-300"
             href="/calendar"
           >
-            Calendar
-          </a>
+            Callendary
+          </Link>
         </li>
         <li className="text-gray-300"></li>
         <li>
@@ -144,13 +144,13 @@ function NavBar() {
         className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
         href="#"
       >
-        <button onClick={() => signIn()}>Sign In</button>
+        <button onClick={() => signIn()}>Login</button>
       </Link>
       <Link
         className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200"
-        href="#"
+        href="/auth/register/"
       >
-        Sign up
+        Register
       </Link>
     </>
   );
@@ -236,13 +236,13 @@ function NavBar() {
             className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
             href="#"
           >
-            <button onClick={() => signIn()}>Sign In</button>
+            <button onClick={() => signIn()}>Login</button>
           </Link>
           <Link
             className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700  rounded-xl"
-            href="#"
+            href="/auth/register"
           >
-            Sign Up
+            Register
           </Link>
         </div>
       </div>

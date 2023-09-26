@@ -12,8 +12,14 @@ export default function Contact() {
 
   const sendMail = async (e) => {
     e.preventDefault();
+    if (name == "" || email == "" || message == "" || subject == "") {
+      setError("There are missing fields to complete!");
+      return;
+    } else {
+      router.push("/contact/succesfull/");
+    }
 
-    const response = await fetch("http://localhost:3000/api/sendEmail/", {
+    const response = await fetch("http://localhost:3000/api/sendEmail/contact", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -79,7 +85,6 @@ export default function Contact() {
           </div>
 
           <form
-            action="#"
             className="w-full md:w-1/2 border border-green-500 p-6 bg-gray-900"
             onSubmit={sendMail}
           >
@@ -91,7 +96,6 @@ export default function Contact() {
                   type="text"
                   id="name"
                   className="required-input px-3 py-2 bg-gray-800 border border-gray-900 focus:border-green-500 focus:outline-none focus:bg-gray-800 focus:text-green-500"
-                  autoComplete="off"
                   required
                   value={name}
                   onChange={(e) => {
@@ -144,7 +148,6 @@ export default function Contact() {
             <div className="w-full pt-3">
               <button
                 type="submit"
-                onClick={() => router.push("/contact/succesfull")}
                 className="w-full bg-gray-900 border border-green-500 px-4 py-2 transition duration-50 focus:outline-none font-semibold hover:bg-green-500 hover:text-white text-xl cursor-pointer"
               >
                 Send
