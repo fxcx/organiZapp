@@ -31,26 +31,32 @@ const io = new Server(server, {
   }
 })
 
-// Salas y sus usuarios
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`)
 
+  const username = `User${socket.id}`
+
+  // Envía el nombre de usuario al cliente
+  socket.emit('user-connected', username)
+
   // Evento 'create-room': crea una sala
   socket.on('create-room', (roomName) => {
-    socket.join(roomName) // El usuario se une a la sala
+    // El usuario se une a la sala
+    socket.join(roomName)
     io.emit('room-list-add', `Se agregó una nueva sala: ${roomName}`)// Emitir mensaje a todos los usuarios conectados
     socket.emit('room-created', `Sala "${roomName}" creada con éxito.`)
   })
 
+  // Evento 'leave-room': cliente sale de una sala
+  socket.on('leave-room', (roomName) => {
+    // El usuario sale de la sala
+    socket.leave(roomName)
+    // emite
+    socket.emit('left-room', `Saliste de la sala: ${roomName}`)
+  })
   // Evento 'send-message': cliente envía un mensaje en una sala específica
   socket.on('send-message', ({ room, message }) => {
     io.to(room).emit('message', message)
-  })
-
-  // Evento 'leave-room': cliente sale de una sala
-  socket.on('leave-room', (roomName) => {
-    socket.leave(roomName) // El usuario sale de la sala
-    socket.emit('left-room', `Saliste de la sala: ${roomName}`)
   })
 
   socket.on('disconnect', () => {
@@ -67,39 +73,3 @@ app.use(errorHandler)
 server.listen(PORT, () => {
   console.log(`el server se levanto ${PORT}`)
 })
-
-// // Salas y sus usuarios
-// const rooms = []
-
-// io.on('connection', (socket) => {
-//   console.log(`User connected: ${socket.id}`)
-
-//   // Evento 'create-room': crea una sala
-//   socket.on('create-room', (roomName) => {
-//       rooms.set(roomName, usersInRoom) // Asociamos el nombre de la sala con el Set de usuarios
-//       socket.join(roomName) // El usuario se une a la sala
-//       io.emit('room-list-add', `Se agregó una nueva sala: ${roomName}`) // Emitir mensaje a todos los usuarios conectados
-//     }
-//     socket.emit( 'error', message)
-//   })
-
-//   // Evento 'send-message': cliente envía un mensaje en una sala específica
-//   socket.on('send-message', ({ room, message }) => {
-//     const roomUsers = rooms.get(room)
-//     if (!roomUsers) {
-//       return socket.emit('error', `No estás en la sala "${room}".`)
-//     }
-//     io.to(room).emit('message', message)
-//   })
-
-//   // Evento 'leave-room': cliente sale de una sala
-//   socket.on('leave-room', (roomName) => {
-//     socket.leave(roomName) // El usuario sale de la sala
-//     socket.emit('left-room', `Saliste de la sala: ${roomName}`)
-//   })
-
-//   socket.on('disconnect', () => {
-//     console.log(`User disconnected: ${socket.id}`)
-//     socket.disconnect() // Desconectar al usuario
-//   })
-// })

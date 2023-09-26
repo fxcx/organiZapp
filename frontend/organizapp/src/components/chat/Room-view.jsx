@@ -1,24 +1,34 @@
 "use client";
 
 import socket from "@/components/chat/socket";
+import { useState, useEffect } from "react";
 
+export default function Room() {
+  const [roomName, setRoomName] = useState("");
+  const [roomList, setRoomList] = useState([]);
 
-export default function Room({ roomName, setRoomName }) {
-  const joinOrCreateRoom = (e) => {
-    e.preventDefault();
+  const joinOrCreateRoom = (evento) => {
+    evento.preventDefault();
     if (roomName) {
-      // Comprueba si el nombre de la sala no está vacío antes de unirse o crear.
-      socket.emit("join-room", roomName); // Puedes unirte a la sala existente.
-      socket.emit("create-room", roomName); // Intenta crear la sala (puede verificar si ya existe en el servidor).
+      socket.emit("join-room", roomName);
+      socket.emit("create-room", roomName);
     }
   };
 
-  const leaveRoom = () => {
-    if (roomName) {
-      // Solo intenta salir de la sala si se ha proporcionado un nombre de sala.
-      socket.emit("leave-room", roomName);
-    }
-  };
+  useEffect(() => {
+    // Escucha el evento 'room-added' para recibir notificaciones sobre nuevas salas creadas.
+    socket.on("room-list-add", (newRoomName) => {
+      // Actualiza la lista de salas disponibles en el estado del componente.
+      setRoomList((prevRooms) => [...prevRooms, newRoomName]);
+    });
+
+    // muere el componente.
+    return () => {
+      socket.off("user-connected");
+      socket.off("send-message");
+      socket.off("disconnect");
+    };
+  }, []);
 
   return (
     <section className="flex bg-stone-600 h-[900px] w-[250px] gap-5">
@@ -32,7 +42,7 @@ export default function Room({ roomName, setRoomName }) {
         />
         <button
           className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md cursor-pointer"
-          onClick={joinOrCreateRoom}
+          onClick={ joinOrCreateRoom }
         >
           Unirse / Crear Sala
         </button>
@@ -41,10 +51,20 @@ export default function Room({ roomName, setRoomName }) {
       <div className="mt-2">
         <button
           className="bg-teal-600 hover:bg-red-900 text-white px-3 py-2 rounded-md cursor-pointer"
-          onClick={leaveRoom}
+          onClick={() => setRoomName("")} // Esto parece ser un botón para "Limpiar" el campo de nombre de sala
         >
           Salir de la Sala
         </button>
+      </div>
+
+      {/* Aquí puedes mostrar la lista de salas disponibles */}
+      <div>
+        <h2>Salas Disponibles:</h2>
+        <ul>
+          {roomList.map((room, index) => (
+            <li key={index}>{room}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
