@@ -24,7 +24,7 @@ And the following libraries:
 
 PRISMA - JWT - JOI - BCRYPT - DOTENV - EXPRESSJWT - CORS - ESLINT (Backend)
 
-DOTENV - TAILWINDCSS - AUTOPREFIXER - ESLINT - NEXTAUTH - REACTDOM (Frontend)
+DOTENV - TAILWINDCSS - AUTOPREFIXER - ESLINT - NEXTAUTH - REACTDOM - SHARP - NODEMAILLER (Frontend)
 
 The members of this project are: Agustin Gercek - Diego Lopez - Gricelda Canaza Vasquez - Facundo Burgos
 
