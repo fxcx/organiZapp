@@ -54,8 +54,9 @@ io.on('connection', (socket) => {
     // emite
     socket.emit('left-room', `Saliste de la sala: ${roomName}`)
   })
-  // Evento 'send-message': cliente envía un mensaje en una sala específica
+  // Escucha el evento 'send-message' del cliente
   socket.on('send-message', ({ room, message }) => {
+  // Emite el mensaje recibido ('message') a todos los clientes en la misma sala ('room')
     io.to(room).emit('message', message)
   })
 

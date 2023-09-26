@@ -1,7 +1,8 @@
 "use client";
 
 import Room from "@/components/chat/Room-view";
-import UserMessage from "@/components/chat/user-view";
+import Message from "@/components/chat/message";
+import User from "./user";
 
 export default function ChatView() {
   return (
@@ -10,7 +11,8 @@ export default function ChatView() {
         <Room />
       </section>
       <section className="flex h-screen">
-        <UserMessage  />
+        <User/>
+        <Message  />
       </section>
     </>
   );

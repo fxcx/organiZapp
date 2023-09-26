@@ -10,8 +10,8 @@ export default function Room() {
   const joinOrCreateRoom = (evento) => {
     evento.preventDefault();
     if (roomName) {
-      socket.emit("join-room", roomName);
       socket.emit("create-room", roomName);
+      socket.emit("join-room", roomName);
     }
   };
 
@@ -22,17 +22,31 @@ export default function Room() {
       setRoomList((prevRooms) => [...prevRooms, newRoomName]);
     });
 
+    // Escucha el evento 'left-room' del servidor
+    socket.on("left-room", (message) => {
+      // Aquí puedes manejar el mensaje que proviene del servidor
+      console.log(message); // O muestra el mensaje en algún lugar de la interfaz
+    });
+
+    socket.on("leave-room", (roomName) => {
+      // Maneja la lógica para salir de la sala
+      console.log(`Saliste de la sala: ${roomName}`);
+      // Puedes agregar más lógica aquí si es necesario
+    });
+
     // muere el componente.
     return () => {
-      socket.off("user-connected");
-      socket.off("send-message");
-      socket.off("disconnect");
+      socket.off("create-room");
+      socket.off("join-room");
+      socket.off("room-list-add");
+      socket.off("left-room");
+      socket.off("leave-room");
     };
   }, []);
 
   return (
-    <section className="flex bg-stone-600 h-[900px] w-[250px] gap-5">
-      <div className="mt-4">
+    <section className="flex flex-col bg-stone-600 h-[900px] w-[300px] gap-5 p-4">
+      <div>
         <input
           type="text"
           placeholder="Nombre de la sala"
@@ -41,28 +55,43 @@ export default function Room() {
           className="w-full px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-teal-400"
         />
         <button
-          className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md cursor-pointer"
-          onClick={ joinOrCreateRoom }
+          className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md mt-2 cursor-pointer"
+          onClick={joinOrCreateRoom}
         >
           Unirse / Crear Sala
         </button>
       </div>
 
-      <div className="mt-2">
-        <button
-          className="bg-teal-600 hover:bg-red-900 text-white px-3 py-2 rounded-md cursor-pointer"
-          onClick={() => setRoomName("")} // Esto parece ser un botón para "Limpiar" el campo de nombre de sala
-        >
-          Salir de la Sala
-        </button>
-      </div>
 
-      {/* Aquí puedes mostrar la lista de salas disponibles */}
-      <div>
-        <h2>Salas Disponibles:</h2>
+      <div className="mt-4">
+        <h2 className="text-white text-lg font-semibold mb-2">
+          Salas Disponibles:
+        </h2>
         <ul>
           {roomList.map((room, index) => (
-            <li key={index}>{room}</li>
+            <li
+              key={index}
+              className="text-white hover:text-teal-400 cursor-pointer"
+            >
+              {room}
+              <button
+                className="bg-teal-600 hover:bg-teal-700 text-white px-2 py-1 rounded-md ml-2 cursor-pointer"
+                onClick={() => {
+                  socket.emit("join-room", room); // Emitir el evento "join-room" con el nombre de la sala
+                }}
+              >
+                Unirse
+              </button>
+
+              <button
+                className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-md ml-2 cursor-pointer"
+                onClick={() => {
+                  socket.emit("leave-room", room); // Emitir el evento "leave-room" con el nombre de la sala
+                }}
+              >
+                Salir
+              </button>
+            </li>
           ))}
         </ul>
       </div>
