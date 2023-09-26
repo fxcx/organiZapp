@@ -1,9 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import { expressjwt as jwt } from 'express-jwt'
 import errorHandler from './middleware/errorHandler.js'
 import { userRouter } from './router/userRouter.js'
 import { taskRouter } from './router/taskRouter.js'
+
 dotenv.config()
 const PORT = process.env.PORT || 3000
 
@@ -11,7 +13,11 @@ const app = express()
 // conexión a diferentes dominios o host
 app.use(cors())
 app.use(express.json())
-
+app.use(jwt({
+  secret: process.env.SECRET_KEY,
+  algorithms: ['HS256']
+}).unless({ path: ['/api/auth/login', 'api/auth/refresh'] })
+)
 // router method
 app.use('/api', userRouter(), taskRouter())
 // manejo de errores
