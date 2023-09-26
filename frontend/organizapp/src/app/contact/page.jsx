@@ -71,7 +71,7 @@ export default function Contact() {
                   Github
                 </Link>
                 <Link
-                 href="/contact/socials/"
+                  href="/contact/socials/"
                   className="flex items-center hover:text-white hover:bg-green-500 p-2"
                 >
                   <svg

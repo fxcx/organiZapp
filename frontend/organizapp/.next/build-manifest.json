@@ -1,44 +1,22 @@
 {
   "polyfillFiles": [
-<<<<<<< HEAD
     "static/chunks/polyfills.js"
   ],
   "devFiles": [
     "static/chunks/webpack.js",
     "static/chunks/react-refresh.js"
-=======
-    "static/chunks/polyfills-78c92fac7aa8fdd8.js"
->>>>>>> db70444 (Added socials page)
   ],
-  "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/KfznOkFX_yWCl4EFHNG8b/_buildManifest.js",
-    "static/KfznOkFX_yWCl4EFHNG8b/_ssgManifest.js"
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js"
   ],
   "rootMainFiles": [
-    "static/chunks/webpack-6df15f4b57e31ae2.js",
-    "static/chunks/fd9d1056-9200b628bfbdc6da.js",
-    "static/chunks/596-971d0676bc2220e8.js",
-    "static/chunks/main-app-b164f9d9456faf48.js"
+    "static/chunks/webpack.js",
+    "static/chunks/main-app.js"
   ],
   "pages": {
-<<<<<<< HEAD
     "/_app": []
-=======
-    "/_app": [
-      "static/chunks/webpack-6df15f4b57e31ae2.js",
-      "static/chunks/framework-8883d1e9be70c3da.js",
-      "static/chunks/main-dc73e7fb7d5352b6.js",
-      "static/chunks/pages/_app-52924524f99094ab.js"
-    ],
-    "/_error": [
-      "static/chunks/webpack-6df15f4b57e31ae2.js",
-      "static/chunks/framework-8883d1e9be70c3da.js",
-      "static/chunks/main-dc73e7fb7d5352b6.js",
-      "static/chunks/pages/_error-c92d5c4bb2b49926.js"
-    ]
->>>>>>> db70444 (Added socials page)
   },
   "ampFirstPages": []
 }

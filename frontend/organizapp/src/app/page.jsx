@@ -1,6 +1,7 @@
 import Image from "next/image";
 import manpng from "../../public/assets/man.png";
 import womanpng from "../../public/assets/woman.png";
+import callendarypng from "../../public/assets/callendary.png"
 
 export default function Home() {
   return (
@@ -57,8 +58,9 @@ export default function Home() {
           <Image
             alt="Callendary"
             className="object-cover object-center h-full w-full"
-            src=""
+            src={callendarypng}
             width={0}
+            quality={100}
             height={0}
           ></Image>
         </div>
