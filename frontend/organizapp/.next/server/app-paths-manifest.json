@@ -1,7 +1,23 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/calendar/page": "app/calendar/page.js"
 =======
   "/page": "app/page.js"
 >>>>>>> c77e4381c37a4f4c4d0bd880ea105ca77dbfa1ec
+=======
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/privacy/page": "app/privacy/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
+  "/contact/socials/page": "app/contact/socials/page.js",
+  "/contact/succesfull/page": "app/contact/succesfull/page.js",
+  "/api/sendEmail/contact/route": "app/api/sendEmail/contact/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/sendEmail/register/route": "app/api/sendEmail/register/route.js",
+  "/auth/register/succesfull/page": "app/auth/register/succesfull/page.js"
+>>>>>>> db70444 (Added socials page)
 }
