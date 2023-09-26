@@ -1,13 +1,21 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import webpLogoImage from "../../public/assets/organizapplogo.webp";
 function Footer() {
   return (
     <footer className="bg-white shadow dark:bg-slate-950 ">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/" className="flex items-center mb-4 sm:mb-0">
-            <Image src="" className="h-8 mr-3" alt="Flowbite Logo" />
+            <Image
+              src={webpLogoImage}
+              className="mr-3"
+              width={75}
+              height={75}
+              quality={100}
+              alt="Logo Image"
+            />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-green-400">
               OrganiZapp
             </span>
