@@ -7,31 +7,35 @@ export default function Room() {
   const [roomName, setRoomName] = useState("");
   const [roomList, setRoomList] = useState([]);
 
-  const joinOrCreateRoom = (evento) => {
+
+
+  const CreateRoom = (evento) => {
     evento.preventDefault();
-    if (roomName) {
-      socket.emit("create-room", roomName);
-      socket.emit("join-room", roomName);
-    }
+      if (roomName) {
+        socket.emit("create-room", roomName);
+      }   
   };
 
+  // Función para unirse a una sala existente
+const joinRoom = (roomName) => {
+  if (roomName) {
+    socket.emit("join-room", roomName);
+    setRoomName(roomName); 
+  }
+};
+
   useEffect(() => {
-    // Escucha el evento 'room-added' para recibir notificaciones sobre nuevas salas creadas.
-    socket.on("room-list-add", (newRoomName) => {
+    socket.on("room-list-add", (roomName) => {
       // Actualiza la lista de salas disponibles en el estado del componente.
-      setRoomList((prevRooms) => [...prevRooms, newRoomName]);
+      setRoomList((prevRooms) => [...prevRooms, roomName]);
     });
 
-    // Escucha el evento 'left-room' del servidor
     socket.on("left-room", (message) => {
-      // Aquí puedes manejar el mensaje que proviene del servidor
-      console.log(message); // O muestra el mensaje en algún lugar de la interfaz
+      console.log(message); 
     });
 
     socket.on("leave-room", (roomName) => {
-      // Maneja la lógica para salir de la sala
       console.log(`Saliste de la sala: ${roomName}`);
-      // Puedes agregar más lógica aquí si es necesario
     });
 
     // muere el componente.
@@ -56,12 +60,11 @@ export default function Room() {
         />
         <button
           className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-md mt-2 cursor-pointer"
-          onClick={joinOrCreateRoom}
+          onClick={CreateRoom}
         >
-          Unirse / Crear Sala
+           Crear Sala
         </button>
       </div>
-
 
       <div className="mt-4">
         <h2 className="text-white text-lg font-semibold mb-2">
@@ -76,17 +79,14 @@ export default function Room() {
               {room}
               <button
                 className="bg-teal-600 hover:bg-teal-700 text-white px-2 py-1 rounded-md ml-2 cursor-pointer"
-                onClick={() => {
-                  socket.emit("join-room", room); // Emitir el evento "join-room" con el nombre de la sala
-                }}
-              >
+                onClick={() => joinRoom(room)}>
                 Unirse
               </button>
 
               <button
                 className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-md ml-2 cursor-pointer"
                 onClick={() => {
-                  socket.emit("leave-room", room); // Emitir el evento "leave-room" con el nombre de la sala
+                  socket.emit("leave-room", room);
                 }}
               >
                 Salir

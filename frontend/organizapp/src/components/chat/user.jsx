@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState  } from "react";
 import socket from "./socket";
 
 export default function User() {
@@ -16,7 +16,7 @@ export default function User() {
 
   return (
     <div className="bg-slate-600 w-[300] p-4">
-      <h1 className="flex">welcome, {username}!</h1>
+      <h1 className="flex">user {username}!</h1>
     </div>
   );
 }

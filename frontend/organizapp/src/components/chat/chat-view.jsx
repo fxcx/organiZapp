@@ -11,7 +11,6 @@ export default function ChatView() {
         <Room />
       </section>
       <section className="flex h-screen">
-        <User/>
         <Message  />
       </section>
     </>

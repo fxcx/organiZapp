@@ -41,28 +41,30 @@ io.on('connection', (socket) => {
 
   // Evento 'create-room': crea una sala
   socket.on('create-room', (roomName) => {
+    console.log(`Usuario ${username} creó la sala: ${roomName}`)
     // El usuario se une a la sala
     socket.join(roomName)
-    io.emit('room-list-add', `Se agregó una nueva sala: ${roomName}`)// Emitir mensaje a todos los usuarios conectados
+
+    io.emit('room-list-add', (roomName))
     socket.emit('room-created', `Sala "${roomName}" creada con éxito.`)
   })
 
-  // Evento 'leave-room': cliente sale de una sala
   socket.on('leave-room', (roomName) => {
     // El usuario sale de la sala
     socket.leave(roomName)
-    // emite
     socket.emit('left-room', `Saliste de la sala: ${roomName}`)
   })
-  // Escucha el evento 'send-message' del cliente
-  socket.on('send-message', ({ room, message }) => {
-  // Emite el mensaje recibido ('message') a todos los clientes en la misma sala ('room')
-    io.to(room).emit('message', message)
+
+  // Escucha el evento 'send-message'
+  socket.on('send-message', ({ message }) => {
+    console.log(`Mensaje recibido en sala ${username}: ${message}`)
+    io.local.emit('message', message
+    )
   })
 
   socket.on('disconnect', () => {
     console.log(`User disconnected: ${socket.id}`)
-    socket.disconnect() // Desconectar al usuario
+    socket.disconnect()
   })
 })
 
