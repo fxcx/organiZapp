@@ -198,7 +198,7 @@ abbr[title] {
 }
  
 .react-calendar__tile--active {
-  background: rgba(52, 211, 105, 0.203);
+  background: rgb(62, 255, 126);
   border-radius: 6px;
   font-weight: bold;
   color: white;
@@ -206,7 +206,7 @@ abbr[title] {
  
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: rgba(52, 211, 105, 0.203);
+  background: rgba(52, 211, 105, 0.705);
   color: white;
 }
  
