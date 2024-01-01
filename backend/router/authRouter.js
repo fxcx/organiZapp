@@ -8,7 +8,7 @@ export const authRoutes = () => {
 
   authRouter.route('/auth/register').post(register)
 
-  authRouter.route('auth/refresh').post(refresh)
+  authRouter.route('/auth/refresh').post(refresh)
 
   return authRouter
 }

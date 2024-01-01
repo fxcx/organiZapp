@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { userController } from '../controllers/userController.js'
 
-export const userRouter = () => {
+export const userRoutes = () => {
   const userRouter = Router()
-  // desestructuro las funciones que importo de controller, la lógica que usaría con prisma
+
   const { getUser, getUserById, createUser, updateUser, deleteUser } = userController()
 
   userRouter.route('/user')

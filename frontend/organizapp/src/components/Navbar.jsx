@@ -6,11 +6,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import webpLogoImage from "../../public/assets/organizapplogo.webp";
 function NavBar() {
   const { data: session } = useSession();
-
   useEffect(() => {
     const handleBurgerClick = () => {
       const menus = document.querySelectorAll(".navbar-menu");
-
       if (menus.length) {
         for (let i = 0; i < menus.length; i++) {
           menus[i].classList.toggle("hidden");

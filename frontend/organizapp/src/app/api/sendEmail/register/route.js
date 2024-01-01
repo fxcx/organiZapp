@@ -6,7 +6,7 @@ const currentDate = new Date().toString();
 
 export async function POST(request) {
   try {
-    console.log("ready");
+
     const { username, email, password, confirmPassword, birthDate } =
       await request.json();
     username, email, password, confirmPassword;

@@ -17,7 +17,7 @@ export const userSchema = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
 
-  birth_year: Joi.number()
+  birth_date: Joi.number()
     .integer()
     .min(1900)
     .max(2013)

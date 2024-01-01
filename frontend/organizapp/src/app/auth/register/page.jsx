@@ -53,8 +53,8 @@ export default function Register() {
       }
     );
     console.log(await response.json());
-
-    const response2 = await fetch("https://localhost:3000/auth/register", {
+    
+    const response2 = await fetch("http://localhost:4000/api/auth/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -63,8 +63,7 @@ export default function Register() {
         username,
         email,
         password,
-        confirmPassword,
-        birthDate,
+        birthDate
       }),
     });
     console.log(await response2.json());

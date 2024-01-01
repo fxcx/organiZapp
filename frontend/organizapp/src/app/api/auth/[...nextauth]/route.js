@@ -18,26 +18,30 @@ const handler = NextAuth({
           username: credentials?.username,
           password: credentials?.password,
         };
-
+    
         try {
-          const response = await fetch("https://localhost:3000/auth/login", {
+          const res = await fetch("http://localhost:4000/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(user),
           });
-
-          if (response.ok) {
-            const user = await response.json();
-            return user;
+          const logindata = JSON.stringify(user)
+          if (res.ok) {
+            console.log("Login:", logindata); 
+            const session = {
+              logindata,
+            };
+            return session;
           } else {
             return null;
           }
         } catch (error) {
           console.error("Authentication failed:", error);
           return null;
-        }
+        } 
+
       },
     }),
 
@@ -57,6 +61,10 @@ const handler = NextAuth({
   pages: {
     signIn: "/auth/login",
   },
+  session: {
+    strategy: "jwt"
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

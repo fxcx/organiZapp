@@ -4,24 +4,23 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Login() {
   const router = useRouter();
 
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { data: session } = useSession();
-  if (session) {
-    router.replace("/");
-    return null;
-  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
 
     const signInResponse = await signIn("credentials", {
-      username: data.get("username"),
-      password: data.get("password"),
+      username,
+      password,
       redirect: false,
     });
 
@@ -32,6 +31,11 @@ export default function Login() {
       setError("Your Username or Password is wrong!");
     }
   };
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
@@ -84,6 +88,10 @@ export default function Login() {
                   <input
                     type="text"
                     id="username"
+                    value={username}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
                     placeholder="Username"
                     className="bg-gray-100 outline-none text-sm flex-1"
                   />
@@ -93,6 +101,10 @@ export default function Login() {
                   <input
                     type="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                     name="password"
                     placeholder="Password"
                     className=" bg-gray-100 outline-none text-sm flex-1  "
